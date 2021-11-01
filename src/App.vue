@@ -5,13 +5,13 @@
   </div>
 </template>
 <script>
-import TheNavigation from '@/components/TheNavigation'
+import TheNavigation from "@/components/TheNavigation";
 
 export default {
-  components:{
-    TheNavigation
-  }
-}
+  components: {
+    TheNavigation,
+  },
+};
 </script>
 
 <style>
@@ -22,6 +22,4 @@ export default {
   text-align: center;
   color: #2c3e50;
 }
-
-
 </style>

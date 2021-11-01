@@ -1,35 +1,37 @@
 <template>
-    <div id="nav">
-      <p class="logo">The Vue School Travel App</p>
-      <ul class="nav-links">
-        <li class="links">
-          <router-link to="/">
-            Home
-          </router-link>
-        </li>
-        <li v-for="destination in destinations" 
-        :key="destination.name" 
-        class="links">
-          <router-link :to="{ 
-            name: 'DestinationDetails', 
-            params: { slug: destination.slug } 
-            }">
-            {{destination.name}}
-          </router-link>
-        </li>
-      </ul>
-    </div>
+  <div id="nav">
+    <p class="logo">The Vue School Travel App</p>
+    <ul class="nav-links">
+      <li class="links">
+        <router-link to="/"> Home </router-link>
+      </li>
+      <li
+        v-for="destination in destinations"
+        :key="destination.name"
+        class="links"
+      >
+        <router-link
+          :to="{
+            name: 'DestinationDetails',
+            params: { slug: destination.slug },
+          }"
+        >
+          {{ destination.name }}
+        </router-link>
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
-import store from "@/store"
+import store from "@/store";
 
 export default {
-  data(){
-    return{
-      destinations: store.destinations
-    }
-  }
-}
+  data() {
+    return {
+      destinations: store.destinations,
+    };
+  },
+};
 </script>
 
 <style scoped>
