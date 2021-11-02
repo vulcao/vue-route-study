@@ -20,7 +20,7 @@ const router = new Router({
       component: () => import(/* webpackChunkName: "brazil" * / "../views/Brazil"),
     },*/
     {
-      path: "/details/:slug",
+      path: "/destination/:slug",
       name: "DestinationDetails",
       component: () =>
         import(
@@ -33,7 +33,8 @@ const router = new Router({
           name: "experienceDetails",
           props: true,
           component: () =>
-            import()
+            import(/* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails"
+            ),
         }
       ]
     },

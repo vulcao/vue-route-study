@@ -23,7 +23,7 @@
         }">
           <img :src="require(`@/assets/${experience.image}`)"
           :alt="experience.name">
-          <span class="card_text">
+          <span class="card__text">
             {{experience.name}}
           </span>
         </router-link>
@@ -70,6 +70,10 @@ p {
   font-size: 20px;
   text-align: left;
 }
+.cards {
+    display: flex;
+    justify-content: space-between;
+}
 .cards img {
   max-height: 200px;
 }
@@ -77,7 +81,7 @@ p {
   padding: 0 20px;
   position: relative;
 }
-.card_text {
+.card__text {
   position: absolute;
   top:50%;
   left: 50%;
