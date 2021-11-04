@@ -2,9 +2,11 @@
   <section>
     <h2>{{ experience.name }}</h2>
     <div class="experience-details">
-      <img :src="require(`@/assets/${experience.image}`)" 
-      :alt="experience.name">
-      <p>{{experience.description}}</p>
+      <img
+        :src="require(`@/assets/${experience.image}`)"
+        :alt="experience.name"
+      />
+      <p>{{ experience.description }}</p>
     </div>
   </section>
 </template>
@@ -18,8 +20,8 @@ export default {
     },
     experienceSlug: {
       type: String,
-      reqquired: true
-    }
+      reqquired: true,
+    },
   },
   computed: {
     destination() {
@@ -29,9 +31,9 @@ export default {
     },
     experience() {
       return this.destination.experiences.find(
-        experience => experience.slug === this.experienceSlug
-      ); 
-    }
+        (experience) => experience.slug === this.experienceSlug
+      );
+    },
   },
 };
 </script>

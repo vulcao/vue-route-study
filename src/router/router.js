@@ -8,18 +8,17 @@ Vue.use(Router);
 const router = new Router({
   mode: "history",
   linkExactActiveClass: "vue-school-active-class",
-  scrollBehavior(to,from,savedPosition){
-    if(savedPosition){
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
       return savedPosition;
-    }
-    else {
-      const position = {}
-      if(to.hash){
+    } else {
+      const position = {};
+      if (to.hash) {
         position.selector = to.hash;
-        if(to.hash === '#experience'){
-          position.offset = {y:140}
+        if (to.hash === "#experience") {
+          position.offset = { y: 140 };
         }
-        if(document.querySelector(to.hash)){
+        if (document.querySelector(to.hash)) {
           return position;
         }
         return false;
@@ -52,31 +51,58 @@ const router = new Router({
           name: "experienceDetails",
           props: true,
           component: () =>
-            import(/* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails"
+            import(
+              /* webpackChunkName: "ExperienceDetails" */ "../views/ExperienceDetails"
             ),
-        }
+        },
       ],
-      beforeEnter: (to,from,next) => {
+      beforeEnter: (to, from, next) => {
         const exists = store.destinations.find(
-          destination => destination.slug === to.params.slug
-        )
-        if(exists){
-          next()
+          (destination) => destination.slug === to.params.slug
+        );
+        if (exists) {
+          next();
+        } else {
+          next({ name: "notFound" });
         }
-        else{
-          next({name: "notFound"})
-        }
-      }
+      },
+    },
+    {
+      path: "/user",
+      name: "user",
+      component: () => import(/* webpackChunkName: "User" */ "../views/User"),
+      meta: { requiredAuth: true },
+    },
+    {
+      path: "/login",
+      name: "login",
+      component: () => import(/* webpackChunkName: "Login" */ "../views/Login"),
+      meta: { requiredAuth: true },
     },
     {
       path: "/404",
       alias: "*",
       name: "notFound",
-      component: () => 
-        import(/* webpackChunkName: "NotFound" */ "../views/NotFound"
-      )
-    }
+      component: () =>
+        import(/* webpackChunkName: "NotFound" */ "../views/NotFound"),
+    },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  //if(to.meta,requiredAuth){   <- mais simples, substituido pelo de baixo
+  if (to.matched.some(record => record.meta.requiredAuth)) {
+    // testa autenticação
+    if(!store.user){
+      next({
+        name: "login"
+      });
+    } else {
+      next();
+    }
+  } else {
+    next();
+  }
 });
 
 export default router;

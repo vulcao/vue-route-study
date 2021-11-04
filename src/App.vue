@@ -41,13 +41,13 @@ export default {
   animation: fadeIn 1s ease-in;
 }
 @keyframes fadeIn {
-  0%{
+  0% {
     opacity: 0;
   }
-  50%{
+  50% {
     opacity: 0.5;
   }
-  100%{
+  100% {
     opacity: 1;
   }
 }
@@ -55,10 +55,10 @@ export default {
   animation: moveUp 0.3s ease-in;
 }
 @keyframes moveUp {
-  0%{
+  0% {
     transform: translateY(0);
   }
-  100%{
+  100% {
     transform: translateY(-400px);
   }
 }
@@ -69,5 +69,16 @@ export default {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.input {
+  border: 1px solid green;
+  padding: 10px;
+  margin-bottom: 20px;
+}
+.btn {
+  background-color: green;
+  color: white;
+  padding: 10px;
 }
 </style>
