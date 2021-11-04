@@ -70,14 +70,21 @@ const router = new Router({
     {
       path: "/user",
       name: "user",
-      component: () => import(/* webpackChunkName: "User" */ "../views/User"),
-      meta: { requiredAuth: true },
+      component: () =>
+        import(/* webpackChunkName: "User" */ "../views/User.vue"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/login",
       name: "login",
       component: () => import(/* webpackChunkName: "Login" */ "../views/Login"),
-      meta: { requiredAuth: true },
+    },
+    {
+      path: "/invoices",
+      name: "invoices",
+      component: () =>
+        import(/* webpacjChunkName: "Invoices" */ "../views/Invoices"),
+      meta: { requiresAuth: true },
     },
     {
       path: "/404",
@@ -90,12 +97,13 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  //if(to.meta,requiredAuth){   <- mais simples, substituido pelo de baixo
-  if (to.matched.some(record => record.meta.requiredAuth)) {
+  //if(to.meta.requiresAuth){  // <- mais simples, substituido pelo de baixo
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
     // testa autenticação
-    if(!store.user){
+    if (!store.user) {
       next({
-        name: "login"
+        name: "login",
+        query: { redirect: to.fullPath }
       });
     } else {
       next();
