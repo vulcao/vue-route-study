@@ -22,11 +22,12 @@ export default {
   },
   methods: {
     login() {
-      // aqui deve haver uma logica de autenticação (api)
-      // para tutorial vamos apensa gravar o username na store
       store.user = this.username;
-      this.$route.push("/user");
-      //const redirectPath = this.$route.query.redirect || '/';
+      console.log(this.$router);
+      console.log(this.$route);
+      this.$router.push("/user");
+      //const redirectPath = this.$router.query.redirect || '/';
+      
       //this.$route.push(redirectPath);
     },
   },
